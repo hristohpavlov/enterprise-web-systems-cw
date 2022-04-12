@@ -2,19 +2,20 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Rating from "./Rating";
 import Pagination from "./pagination";
-import axios from "axios";
 import { useState } from "react";
 import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { listProduct } from "../../Redux/Actions/ProductActions";
+import Loading from "../LoadingError/Loading"
+import Message from "../LoadingError/Error";
 
 const ShopSection = () => {
-  const [products, setProducts] = useState([])
+  const dispatch = useDispatch();
+  const productList = useSelector((state) => state.productList)
+  const {loading,error,products} = productList;
   useEffect(() => {
-    const fetchProducts = async() => {
-      const { data } = await axios.get("/api/products")
-      setProducts(data);
-    };
-    fetchProducts();
-  }, [])
+    dispatch(listProduct())
+  }, [dispatch])
   
   return (
     <>
@@ -23,7 +24,12 @@ const ShopSection = () => {
           <div className="row">
             <div className="col-lg-12 col-md-12 article">
               <div className="shopcontainer row">
-                {products.map((product) => (
+                {
+                  loading ? (<div className="mb-5"><Loading /></div>) : error ? (<Message variant="alert-danger">{error}</Message>)
+                  :
+                  (
+                    <>
+                      {products.map((product) => (
                   <div
                     className="shop col-lg-4 col-md-6 col-sm-6"
                     key={product._id}
@@ -51,6 +57,10 @@ const ShopSection = () => {
                     </div>
                   </div>
                 ))}
+                    </>
+                  )
+                }
+                
                 {/* Pagination */}
                 <Pagination />
               </div>

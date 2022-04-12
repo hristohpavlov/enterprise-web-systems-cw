@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { Navbar,Nav } from "react-bootstrap";
 import { useState} from "react";
 import { useEffect } from "react";
+import { useSelector } from "react-redux";
 
 export function HeaderComponent(){
     // const indizesItems = [
@@ -27,7 +28,8 @@ export function HeaderComponent(){
     // useEffect(() => {
     //     document.body.classList.toggle('mobile-menu-open', expanded);
     // }, [expanded])
-
+  const cart = useSelector((state) => state.cart);
+  const { cartItems } = cart;
     return(
         <div>
         {/* Top Header */}
@@ -93,7 +95,7 @@ export function HeaderComponent(){
                     </div>
                     <Link to="/cart" className="cart-mobile-icon">
                       <i className="fas fa-shopping-bag"></i>
-                      <span className="badge">4</span>
+                      <span className="badge">{cartItems.length}</span>
                     </Link>
                   </div>
                   <div className="col-12 d-flex align-items-center">
@@ -156,7 +158,7 @@ export function HeaderComponent(){
   
                   <Link to="/cart">
                     <i className="fas fa-shopping-bag"></i>
-                    <span className="badge">4</span>
+                    <span className="badge">{cartItems.length}</span>
                   </Link>
                 </div>
               </div>
