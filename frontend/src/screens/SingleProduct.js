@@ -2,10 +2,19 @@ import React from "react";
 import Rating from "../components/homeComponents/Rating";
 import { Link } from "react-router-dom";
 import Message from "./../components/LoadingError/Error";
-import products from "../data/Products";
+import { useState } from "react";
+import { useEffect } from "react";
+import axios from "axios";
 
 const SingleProduct = ({ match }) => {
-  const product = products.find((p) => p._id === match.params.id);
+  const [product, setProduct] = useState({})
+  useEffect(() => {
+    const fetchProduct = async() => {
+      const { data } = await axios.get(`/api/products/${match.params.id}`);
+      setProduct(data);
+    };
+    fetchProduct();
+  }, [match])
   return (
     <>
       <div className="container single-product">
