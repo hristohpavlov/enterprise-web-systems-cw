@@ -62,7 +62,7 @@ const ShopSection = () => {
                 }
                 
                 {/* Pagination */}
-                <Pagination />
+                {/* <Pagination /> */}
               </div>
             </div>
           </div>

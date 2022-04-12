@@ -19,7 +19,7 @@ const CartScreen = ({match, location, history}) => {
   },[dispatch, productId, qty])
 
   const checkOutHandler = () =>{
-    history.push('/login?redirect=shipping')
+    history.push('/login?redirect=payment')
   };
 
   const removeFromCartHandler = (id) =>{
@@ -42,7 +42,7 @@ const CartScreen = ({match, location, history}) => {
                 fontSize: "12px",
               }}
             >
-              SHOPPING NOW
+              SHOP NOW
             </Link>
           </div>
           )
