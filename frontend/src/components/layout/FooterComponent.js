@@ -1,5 +1,5 @@
 import './FooterComponent.scss'
-
+import { Link } from 'react-router-dom'
 export function  FooterComponent(){
     return(
     <footer className="cards-footer-bg-fix">
@@ -40,7 +40,9 @@ export function  FooterComponent(){
         <div className="container-fluid padding-footer footer-bg-fix">
 			      <div className="row text-center padding-footer">
 				     <div className="col-md-4">
-					     <a href="index.html"><img src="images/logo-white.png" width="170" height="58"></img></a>
+                  <Link className="navbar-brand " to="/">
+                    <img alt="logo" src="/images/logo.png" className="fix-logo-footer"/>
+                  </Link>
 						 <hr></hr>
 						 <p>555-555-5555</p>
 						 <p>email@myemail.com</p>
@@ -66,7 +68,7 @@ export function  FooterComponent(){
 					 </div>
 					 <div className="col-12 footer-bg-fix" style={{marginBottom:'-31px'}} >
 					  <hr className="light-100"></hr>
-					  <h6 style={{padding:'0'}}>Made by Hristo Pavlov slipknot.com</h6>
+					  <h6 style={{padding:'0'}}>Made by Hristo Pavlov @ Love-for-the-uglies.com</h6>
 					 </div>
 				  </div>
 				</div>

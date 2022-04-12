@@ -131,7 +131,8 @@ export function HeaderComponent(){
                   </Link>
                 </div>
                 <div className="col-md-6 col-8 d-flex align-items-center">
-                      <Link className="dropdown-item" to="#" onClick={logoutHandler}>
+                    <h1>Love-for-the-Uglies</h1>
+                      {/* <Link className="dropdown-item" to="#" onClick={logoutHandler}>
                         Logout
                       </Link>
                       <Link className="dropdown-item" to="#" onClick={logoutHandler}>
@@ -139,7 +140,7 @@ export function HeaderComponent(){
                       </Link>
                       <Link className="dropdown-item" to="#" onClick={logoutHandler}>
                         Logout
-                      </Link>
+                      </Link> */}
                 </div>
                 <div className="col-md-3 d-flex align-items-center justify-content-end Login-Register">
                   {
