@@ -2,7 +2,8 @@ import { Link } from "react-router-dom";
 import { Navbar,Nav } from "react-bootstrap";
 import { useState} from "react";
 import { useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { logout } from "../../Redux/Actions/UserActions";
 
 export function HeaderComponent(){
     // const indizesItems = [
@@ -28,8 +29,14 @@ export function HeaderComponent(){
     // useEffect(() => {
     //     document.body.classList.toggle('mobile-menu-open', expanded);
     // }, [expanded])
+  const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
   const { cartItems } = cart;
+  const userLogin = useSelector((state) => state.userLogin)
+  const {error,loading, userInfo} = userLogin;
+  const logoutHandler = () => {
+    dispatch(logout())
+  }
     return(
         <div>
         {/* Top Header */}
@@ -73,6 +80,8 @@ export function HeaderComponent(){
                     </Link>
                   </div>
                   <div className="col-6 d-flex align-items-center justify-content-end Login-Register">
+                    {
+                      userInfo ? (
                     <div className="btn-group">
                       <button
                         type="button"
@@ -88,11 +97,37 @@ export function HeaderComponent(){
                           Profile
                         </Link>
   
-                        <Link className="dropdown-item" to="#">
+                        <Link className="dropdown-item" to="#" onClick={logoutHandler}>
                           Logout
                         </Link>
                       </div>
                     </div>
+                      )
+                      :
+                      (
+                        <div className="btn-group">
+                      <button
+                        type="button"
+                        className="name-button dropdown-toggle"
+                        data-toggle="dropdown"
+                        aria-haspopup="true"
+                        aria-expanded="false"
+                      >
+                        <i class="fas fa-user"></i>
+                      </button>
+                      <div className="dropdown-menu">
+                        <Link className="dropdown-item" to="/login">
+                          Login
+                        </Link>
+  
+                        <Link className="dropdown-item" to="/register">
+                          Register
+                        </Link>
+                      </div>
+                    </div>
+                      )
+                    }
+                    
                     <Link to="/cart" className="cart-mobile-icon">
                       <i className="fas fa-shopping-bag"></i>
                       <span className="badge">{cartItems.length}</span>
@@ -135,7 +170,10 @@ export function HeaderComponent(){
                   </form>
                 </div>
                 <div className="col-md-3 d-flex align-items-center justify-content-end Login-Register">
-                  <div className="btn-group">
+                  {
+                    userInfo ?
+                    (
+                    <div className="btn-group">
                     <button
                       type="button"
                       className="name-button dropdown-toggle"
@@ -143,18 +181,32 @@ export function HeaderComponent(){
                       aria-haspopup="true"
                       aria-expanded="false"
                     >
-                      Hi, Admin Doe
+                      Hi, {userInfo.name}
                     </button>
                     <div className="dropdown-menu">
                       <Link className="dropdown-item" to="/profile">
                         Profile
                       </Link>
   
-                      <Link className="dropdown-item" to="#">
+                      <Link className="dropdown-item" to="#" onClick={logoutHandler}>
                         Logout
                       </Link>
                     </div>
                   </div>
+                    )
+                    :
+                    (
+                      <>
+                        <Link to="/register">
+                        Register
+                      </Link>
+                      <Link to="/login">
+                        Login
+                      </Link>
+                      </>
+                    )
+                  }
+                  
   
                   <Link to="/cart">
                     <i className="fas fa-shopping-bag"></i>
